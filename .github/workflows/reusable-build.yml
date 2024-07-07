@@ -52,11 +52,7 @@ jobs:
           fi
 
           # BASE_IMAGE_NAME
-          if [[ "${{ matrix.base_name }}" =~ "bluefin" ]]; then
-              echo "BASE_IMAGE_NAME"="bluefin" >> $GITHUB_ENV
-          elif [[ "${{ matrix.base_name }}" =~ "aurora" ]]; then
-              echo "BASE_IMAGE_NAME"="aurora" >> $GITHUB_ENV
-          fi
+          echo "BASE_IMAGE_NAME"="${{ matrix.base_name }}" >> $GITHUB_ENV
 
           # TARGET_NAME
           if [[ "${{ matrix.base_name }}" =~ "dx" ]]; then
