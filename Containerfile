@@ -17,7 +17,7 @@ FROM base AS dx
 
 # Build, Clean-up, Commit
 RUN rpm-ostree install alacritty kitty helix neovim neovide && \
-    rpm-ostree install hyprland waybar swaybg wofi grim slurp swaylock pipewire pipewire-pulseaudio pipewire-utils pulseaudio-utils &&
+    rpm-ostree install hyprland waybar swaybg wofi grim slurp swaylock pipewire pipewire-pulseaudio pipewire-utils pulseaudio-utils && \
     ostree container commit && \
     mkdir -p /var/tmp && \
     chmod -R 1777 /var/tmp
