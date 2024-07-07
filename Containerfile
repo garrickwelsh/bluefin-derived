@@ -16,6 +16,8 @@ FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}:${FEDORA_MAJOR_VERSION} AS base
 FROM base AS dx
 
 # Build, Clean-up, Commit
-RUN ostree container commit && \
+RUN rpm-ostree install alacritty kitty helix neovim neovide &&
+    rpm-ostree install hyprland waybar swaybg wofi grim slurp swaylock pipewire pipewire-pulseaudio pipewire-utils pulseaudio-utils &&
+    ostree container commit && \
     mkdir -p /var/tmp && \
     chmod -R 1777 /var/tmp
