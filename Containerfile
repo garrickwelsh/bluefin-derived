@@ -16,7 +16,7 @@ FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}:${FEDORA_MAJOR_VERSION} AS base
 FROM base AS dx
 
 # Build, Clean-up, Commit
-RUN rpm-ostree install alacritty kitty helix neovim fire-code-fonts && \
+RUN rpm-ostree install alacritty kitty helix neovim fira-code-fonts && \
     rpm-ostree install hyprland waybar swaybg wofi grim slurp swaylock pipewire pipewire-pulseaudio pipewire-utils pulseaudio-utils && \
     ostree container commit && \
     mkdir -p /var/tmp && \
