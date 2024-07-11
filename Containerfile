@@ -17,8 +17,8 @@ FROM base AS dx
 
 WORKDIR "/usr/local/bin"
 
-RUN wget "https://vault.bitwarden.com/download/?app=desktop&platform=linux" && \
-    chmod 555 Bitwarden*.AppImage
+RUN curl -o Bitwarden.AppImage "https://vault.bitwarden.com/download/?app=desktop&platform=linux" && \
+    chmod 555 Bitwarden.AppImage
 
 # Build, Clean-up, Commit
 RUN rpm-ostree install alacritty kitty helix neovim fira-code-fonts && \
