@@ -17,8 +17,8 @@ FROM base AS dx
 
 WORKDIR "/usr/local/bin"
 
-RUN curl -o Bitwarden.AppImage "https://vault.bitwarden.com/download/?app=desktop&platform=linux" && \
-    chmod 555 Bitwarden.AppImage && \
+RUN wget -O /usr/local/bin/bitwarden.AppImage "https://vault.bitwarden.com/download/?app=desktop&platform=linux" && \
+    chmod 555 /usr/local/bin/bitwarden.AppImage && \
     rpm-ostree install alacritty kitty helix neovim fira-code-fonts && \
     rpm-ostree install hyprland waybar swaybg wofi grim slurp swaylock pipewire pipewire-pulseaudio pipewire-utils pulseaudio-utils && \
     ostree container commit && \
