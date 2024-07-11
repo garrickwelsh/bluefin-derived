@@ -15,6 +15,11 @@ FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}:${FEDORA_MAJOR_VERSION} AS base
 ## bluefin-dx developer edition image section
 FROM base AS dx
 
+WORKDIR "/usr/local/bin"
+
+RUN wget https://vault.bitwarden.com/download/?app=desktop&platform=linux &&
+    chmod 555 Bitwarden*.AppImage
+
 # Build, Clean-up, Commit
 RUN rpm-ostree install alacritty kitty helix neovim fira-code-fonts && \
     rpm-ostree install hyprland waybar swaybg wofi grim slurp swaylock pipewire pipewire-pulseaudio pipewire-utils pulseaudio-utils && \
