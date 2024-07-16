@@ -18,7 +18,8 @@ FROM base AS dx
 WORKDIR "/usr/local/bin"
 
 RUN rpm-ostree install alacritty kitty helix neovim fira-code-fonts && \
-    rpm-ostree install hyprland waybar swaybg wofi grim slurp swaylock pipewire pipewire-pulseaudio pipewire-utils pulseaudio-utils && \
+    rpm-ostree install hyprland waybar swaybg wofi grim slurp swaylock && \
+    rpm-ostree install dunst pipewire pipewire-pulseaudio pipewire-utils pulseaudio-utils && \
     ostree container commit && \
     mkdir -p /var/tmp && \
     chmod -R 1777 /var/tmp
