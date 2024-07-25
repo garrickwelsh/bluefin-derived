@@ -10,16 +10,15 @@ ARG KERNEL="${KERNEL:-}"
 ARG UBLUE_IMAGE_TAG="${UBLUE_IMAGE_TAG:-latest}"
 
 ## bluefin image section
-FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}:${FEDORA_MAJOR_VERSION} AS base
-
 ## bluefin-dx developer edition image section
-FROM base AS dx
+FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}:${FEDORA_MAJOR_VERSION} AS dx
 
 WORKDIR "/usr/local/bin"
 
 RUN rpm-ostree install alacritty kitty helix neovim fira-code-fonts \
      hyprland waybar swaybg wofi grim slurp swaylock \
-     dunst pipewire pipewire-pulseaudio pipewire-utils pulseaudio-utils && \
+     dunst pipewire pipewire-pulseaudio pipewire-utils pulseaudio-utils \
+     NetworkManager-tui && \
     ostree container commit && \
     mkdir -p /var/tmp && \
     chmod -R 1777 /var/tmp
