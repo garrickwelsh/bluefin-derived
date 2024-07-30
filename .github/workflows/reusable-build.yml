@@ -74,7 +74,7 @@ jobs:
         run: |
           set -eo pipefail
           if [[ ${{ matrix.fedora_version }} == "stable" ]]; then
-            KERNEL_RELEASE=$(skopeo inspect docker://ghcr.io/ublue-os/base-main/stable | jq -r '.Labels["ostree.linux"] | split(".x86_64")[0]')
+            KERNEL_RELEASE=$(skopeo inspect docker://ghcr.io/ublue-os/base-main:stable | jq -r '.Labels["ostree.linux"] | split(".x86_64")[0]')
           elif [[ ${{ matrix.fedora_version }} == "gts" ]]; then
             coreos_kernel_release=$(skopeo inspect docker://ghcr.io/ublue-os/base-main:stable | jq -r '.Labels["ostree.linux"] | split(".x86_64")[0]')
             major_minor_patch=$(echo "$coreos_kernel_release" | cut -d '-' -f 1)
