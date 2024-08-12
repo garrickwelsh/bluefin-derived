@@ -13,9 +13,11 @@ ARG UBLUE_IMAGE_TAG="${UBLUE_IMAGE_TAG:-latest}"
 ## bluefin-dx developer edition image section
 FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}:${FEDORA_MAJOR_VERSION} AS dx
 
-WORKDIR "/usr/local/bin"
+# WORKDIR "/usr/local/bin"
 
-RUN rpm-ostree install alacritty kitty helix neovim fira-code-fonts \
+RUN wget "https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedora-$(rpm -E %fedora)/ryanabx-cosmic-epoch-fedora-$(rpm -E %fedora).repo" -O /etc/yum.repos.d/_copr_ryanabx-cosmic.repo && \
+     rpm-ostree install cosmic-desktop \
+      alacritty kitty helix neovim fira-code-fonts \
      hyprland waybar swaybg wofi grim slurp swaylock \
      dunst pipewire pipewire-pulseaudio pipewire-utils pulseaudio-utils \
      NetworkManager-tui && \
