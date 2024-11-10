@@ -16,11 +16,12 @@ FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}:${FEDORA_MAJOR_VERSION} AS dx
 # WORKDIR "/usr/local/bin"
 
 RUN wget "https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedora-$(rpm -E %fedora)/ryanabx-cosmic-epoch-fedora-$(rpm -E %fedora).repo" -O /etc/yum.repos.d/_copr_ryanabx-cosmic.repo && \
-     rpm-ostree install cosmic-desktop \
+    rpm-ostree install cosmic-desktop \
       alacritty kitty helix neovim fira-code-fonts \
-     hyprland waybar swaybg wofi grim slurp swaylock \
-     dunst pipewire pipewire-pulseaudio pipewire-utils pulseaudio-utils \
-     NetworkManager-tui && \
+      hyprland waybar swaybg wofi grim slurp swaylock \
+      dunst pipewire pipewire-pulseaudio pipewire-utils pulseaudio-utils \
+      tealdeer \
+      NetworkManager-tui && \
     ostree container commit && \
     mkdir -p /var/tmp && \
     chmod -R 1777 /var/tmp
