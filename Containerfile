@@ -20,7 +20,7 @@ RUN wget "https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedo
       alacritty kitty helix neovim fira-code-fonts \
       hyprland waybar swaybg wofi grim slurp swaylock \
       dunst pipewire pipewire-pulseaudio pipewire-utils pulseaudio-utils \
-      tealdeer \
+      tealdeer zed \
       NetworkManager-tui && \
     ostree container commit && \
     mkdir -p /var/tmp && \
