@@ -24,10 +24,13 @@ RUN wget "https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedo
       dunst pipewire pipewire-pulseaudio pipewire-utils pulseaudio-utils \
       tealdeer \
       NetworkManager-tui \
-      zed \
-      https://github.com/twpayne/chezmoi/releases/download/v${CHEZMOI_VERSION}/chezmoi-${CHEZMOI_VERSION}-x86_64.rpm \
-      && \
-    ostree container commit && \
+      https://github.com/twpayne/chezmoi/releases/download/v${CHEZMOI_VERSION}/chezmoi-${CHEZMOI_VERSION}-x86_64.rpm 
+      # && \
+
+RUN rpm-ostree install zed
+      
+RUN ostree container commit && \
     mkdir -p /var/tmp && \
     chmod -R 1777 /var/tmp
+
     # rpm-ostree install terra-release && \
