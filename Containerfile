@@ -25,7 +25,6 @@ RUN wget "https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedo
       NetworkManager-tui \
       https://github.com/twpayne/chezmoi/releases/download/v${CHEZMOI_VERSION}/chezmoi-${CHEZMOI_VERSION}-x86_64.rpm \
       && \
-    npm install -g @devcontainers/cli && \
     ostree container commit && \
     mkdir -p /var/tmp && \
     chmod -R 1777 /var/tmp
