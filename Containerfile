@@ -28,6 +28,7 @@ RUN wget "https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedo
       https://github.com/twpayne/chezmoi/releases/download/v${CHEZMOI_VERSION}/chezmoi-${CHEZMOI_VERSION}-x86_64.rpm && \
     ostree container commit && \
     mkdir -p /var/tmp && \
-    chmod -R 1777 /var/tmp
+    chmod -R 1777 /var/tmp && \
+    echo "org.freedesktop.impl.portal.Secret=gnome-keyring;" >> /usr/share/xdg-desktop-portal/hyprland-portals.conf
 
     # rpm-ostree install terra-release && \
