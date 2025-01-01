@@ -29,6 +29,6 @@ RUN wget "https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedo
     ostree container commit && \
     mkdir -p /var/tmp && \
     chmod -R 1777 /var/tmp && \
-    echo "org.freedesktop.impl.portal.Secret=gnome-keyring;" >> /usr/share/xdg-desktop-portal/hyprland-portals.conf
+    echo -e "\norg.freedesktop.impl.portal.Secret=gnome-keyring;\n" >> /usr/share/xdg-desktop-portal/hyprland-portals.conf
 
     # rpm-ostree install terra-release && \
