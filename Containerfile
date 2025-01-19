@@ -34,7 +34,7 @@ RUN wget "https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedo
   && tar Jxf helix-${HELIX_VERSION}-x86_64-linux.tar.xz \
   && cd helix-${HELIX_VERSION}-x86_64-linux \
   && install -Dm755 -t "/usr/bin" hx \
-  && install -Dm644 -d "/usr/lib/helix" runtime \
+  && mv runtime "/usr/bin" \
   && install -Dm644 -T contrib/completion/hx.bash "/usr/share/bash-completion/completions/hx" \
   && install -Dm644 -T contrib/completion/hx.fish "/usr/share/fish/vendor_completions.d/hx.fish" \
   && install -Dm644 -T contrib/completion/hx.zsh "/usr/share/zsh/site-functions/_hx" \
