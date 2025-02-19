@@ -26,6 +26,7 @@ RUN wget "https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedo
       tealdeer \
       NetworkManager-tui \
       rsync \
+      spice-gtk-tools \
       # zed \
       gh \
       https://github.com/twpayne/chezmoi/releases/download/v${CHEZMOI_VERSION}/chezmoi-${CHEZMOI_VERSION}-x86_64.rpm \
