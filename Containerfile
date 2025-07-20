@@ -44,11 +44,11 @@ RUN wget "https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedo
   && cd .. \
   && rm -r helix-${HELIX_VERSION}-x86_64-linux \
   && rm helix-${HELIX_VERSION}-x86_64-linux.tar.xz \
-  && JJ_VERSION=$(curl https://api.github.com/repos/jj-vcs/jj/releases/latest | jq -r .tag_name)
-  && curl -Lo jj-${JJ_VERSION}-x86_64-unknown-linux-musl.tar.gz https://github.com/jj-vcs/jj/releases/download/${JJ_VERSION}/jj-${JJ_VERSION}-x86_64-unknown-linux-musl.tar.gz
-  && tar zxvj jj-${JJ_VERSION}-x86_64-unknown-linux-musl.tar.gz ./jj
-  && install -Dm755 -t "/usr/bin" jj
-  && rm jj-${JJ_VERSION}-x86_64-unknown-linux-musl.tar.gz jj
+  && JJ_VERSION=$(curl https://api.github.com/repos/jj-vcs/jj/releases/latest | jq -r .tag_name) \
+  && curl -Lo jj-${JJ_VERSION}-x86_64-unknown-linux-musl.tar.gz https://github.com/jj-vcs/jj/releases/download/${JJ_VERSION}/jj-${JJ_VERSION}-x86_64-unknown-linux-musl.tar.gz \
+  && tar zxvf jj-${JJ_VERSION}-x86_64-unknown-linux-musl.tar.gz ./jj \
+  && install -Dm755 -t "/usr/bin" jj \
+  && rm jj-${JJ_VERSION}-x86_64-unknown-linux-musl.tar.gz jj \
   && ostree container commit \
   && mkdir -p /var/tmp \
   && chmod -R 1777 /var/tmp 
