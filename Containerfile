@@ -55,11 +55,6 @@ RUN wget "https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedo
   && mv jjui-${JJUI_VERSION}-linux-amd64 jjui \
   && install -Dm755 -t "/usr/bin" jjui \
   && rm jjui-${JJUI_VERSION}-linux-amd64.zip jjui \
-  && LAZYJJ_VERSION=$(curl https://api.github.com/repos/Cretezy/lazyjj/releases/latest | jq -r .tag_name) \
-  && curl -Lo lazyjj-${LAZYJJ_VERSION}-x86_64-unknown-linux-musl.tar.gz https://github.com/Cretezy/lazyjj/releases/download/${LAZYJJ_VERSION}/lazyjj-${LAZYJJ_VERSION}-x86_64-unknown-linux-musl.tar.gz \
-  && tar zxvf lazyjj-${LAZYJJ_VERSION}-x86_64-unknown-linux-musl.tar.gz \
-  && install -Dm755 -t "/usr/bin" lazyjj \
-  && rm lazyjj-${LAZYJJ_VERSION}-x86_64-unknown-linux-musl.tar.gz lazyjj \
   && ostree container commit \
   && mkdir -p /var/tmp \
   && chmod -R 1777 /var/tmp 
