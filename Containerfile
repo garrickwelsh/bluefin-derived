@@ -19,6 +19,8 @@ RUN wget "https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedo
     && CHEZMOI_VERSION=$(curl -s "https://api.github.com/repos/twpayne/chezmoi/releases/latest" | jq -r .tag_name | \grep -Po 'v\K[^"]*') \
     # No longer testing the Zed Editor leave for the moment.
     # && curl -fsSL https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo | tee /etc/yum.repos.d/terra.repo \
+    && curl --output "/etc/yum.repos.d/solopasha-hyprland-fedora-43.repo" "https://copr.fedorainfracloud.org/coprs/solopasha/hyprland/repo/fedora-43/solopasha-hyprland-fedora-43.repo" \
+    # && rpm-ostree refresh-md --force \
     && rpm-ostree install cosmic-desktop \
       alacritty kitty helix neovim fira-code-fonts \
       hyprland waybar swaybg wofi grim slurp swaylock \
