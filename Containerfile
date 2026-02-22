@@ -21,6 +21,7 @@ RUN wget "https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedo
     # && curl -fsSL https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo | tee /etc/yum.repos.d/terra.repo \
     && curl --output "/etc/yum.repos.d/solopasha-hyprland-fedora-43.repo" "https://copr.fedorainfracloud.org/coprs/solopasha/hyprland/repo/fedora-43/solopasha-hyprland-fedora-43.repo" \
     # && rpm-ostree refresh-md --force \
+    && DIVE_VERSION=$(curl -sL "https://api.github.com/repos/wagoodman/dive/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') \
     && rpm-ostree install cosmic-desktop \
       alacritty kitty helix neovim fira-code-fonts \
       hyprland waybar swaybg wofi grim slurp swaylock \
@@ -32,6 +33,7 @@ RUN wget "https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedo
       # zed \
       gh \
       https://github.com/twpayne/chezmoi/releases/download/v${CHEZMOI_VERSION}/chezmoi-${CHEZMOI_VERSION}-x86_64.rpm \
+      https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/dive_${DIVE_VERSION}_linux_amd64.rpm \
       niri xwayland-satellite \
   # Install helix to get the latest version
   && HELIX_VERSION=$(curl -s "https://api.github.com/repos/helix-editor/helix/releases/latest" | jq -r .tag_name) \
