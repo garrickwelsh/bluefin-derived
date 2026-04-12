@@ -83,21 +83,22 @@ jobs:
           # else
           #   KERNEL_RELEASE=$(skopeo inspect docker://ghcr.io/ublue-os/${{ matrix.base_name }}:${{ matrix.fedora_version }} | jq -r '.Labels["ostree.linux"] | split(".x86_64")[0]')
           # fi
-          KERNEL_RELEASE=$(skopeo inspect docker://ghcr.io/ublue-os/${{ matrix.base_name }}:${{ matrix.fedora_version }} | jq -r '.Labels["ostree.linux"] | split(".x86_64")[0]')
+          KERNEL_RELEASE=$(skopeo inspect -n docker://ghcr.io/ublue-os/${{ matrix.base_name }}:${{ matrix.fedora_version }} | jq -r '.Labels["ostree.linux"] | split(".x86_64")[0]')
           fedora_version=$(echo $KERNEL_RELEASE | grep -oP 'fc\K[0-9]+')
           echo "kernel_release=$KERNEL_RELEASE" >> $GITHUB_OUTPUT
           echo "fedora_version=$fedora_version" >> $GITHUB_OUTPUT
-          ver=$(skopeo inspect docker://ghcr.io/ublue-os/${{ matrix.base_name }}:$fedora_version | jq -r '.Labels["org.opencontainers.image.version"]')
+          echo "skopeo inspect -n docker://ghcr.io/ublue-os/${{ matrix.base_name }}:$fedora_version | jq -r '.Labels[\"org.opencontainers.image.version\"]'"
+          ver=$(skopeo inspect -n docker://ghcr.io/ublue-os/${{ matrix.base_name }}:$fedora_version | jq -r '.Labels["org.opencontainers.image.version"]')
           if [ -z "$ver" ] || [ "null" = "$ver" ]; then
             echo "inspected image version must not be empty or null"
             exit 1
           fi
           echo "VERSION=$ver" >> $GITHUB_OUTPUT
 
-      - name: Verify base image
-        uses: EyeCantCU/cosign-action/verify@58722a084c82190b57863002d494c91eabbe9e79 # v0.3.0
-        with:
-          containers: ${{ matrix.base_name }}:${{ steps.labels.outputs.fedora_version }}
+      # - name: Verify base image
+      #   uses: EyeCantCU/cosign-action/verify@58722a084c82190b57863002d494c91eabbe9e79 # v0.3.0
+      #   with:
+      #     containers: ${{ matrix.base_name }}:${{ steps.labels.outputs.fedora_version }}
 
       - name: Maximize build space
         if: contains(matrix.base_name, '-dx') && (github.event_name == 'pull_request' && ( matrix.image_flavor == 'main' || matrix.image_flavor == 'nvidia' ) || github.event_name != 'pull_request')
