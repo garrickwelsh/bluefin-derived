@@ -15,13 +15,35 @@ FROM ghcr.io/ublue-os/${BASE_IMAGE_NAME}:${FEDORA_MAJOR_VERSION} AS dx
 
 # WORKDIR "/usr/local/bin"
 
-RUN wget "https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedora-$(rpm -E %fedora)/ryanabx-cosmic-epoch-fedora-$(rpm -E %fedora).repo" -O /etc/yum.repos.d/_copr_ryanabx-cosmic.repo \
-    && CHEZMOI_VERSION=$(curl -s "https://api.github.com/repos/twpayne/chezmoi/releases/latest" | jq -r .tag_name | \grep -Po 'v\K[^"]*') \
+RUN if [[ "${FEDORA_MAJOR_VERSION}" == "rawhide" ]]; then \
+        curl -Lo /etc/yum.repos.d/_copr_ryanabx-cosmic.repo \
+            https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedora-rawhide/ryanabx-cosmic-epoch-fedora-rawhide.repo \
+    ; else curl -Lo /etc/yum.repos.d/_copr_ryanabx-cosmic.repo \
+            https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedora-$(rpm -E %fedora)/ryanabx-cosmic-epoch-fedora-$(rpm -E %fedora).repo \
+    ; fi \
     # No longer testing the Zed Editor leave for the moment.
     # && curl -fsSL https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo | tee /etc/yum.repos.d/terra.repo \
     # && rpm-ostree refresh-md --force \
+    && CHEZMOI_VERSION=$(curl -s "https://api.github.com/repos/twpayne/chezmoi/releases/latest" | jq -r .tag_name | \grep -Po 'v\K[^"]*') \
     && DIVE_VERSION=$(curl -sL "https://api.github.com/repos/wagoodman/dive/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') \
-    && rpm-ostree install cosmic-desktop \
+    && rpm-ostree install \
+      # cosmic-applets \
+      # cosmic-app-library \
+      # cosmic-bg \
+      # cosmic-comp \
+      # cosmic-desktop \
+      # cosmic-edit \
+      # cosmic-files \
+      # cosmic-icon-theme \
+      # cosmic-idle \
+      # cosmic-initial-setup \
+      # cosmic-launcher \
+      # cosmic-monitor \
+      # cosmic-notifications \
+      # cosmic-osd \
+      # cosmic-panel \
+      # cosmic-player \
+      # cosmic-screenshot \
       alacritty kitty helix neovim fira-code-fonts \
       waybar swaybg wofi grim slurp swaylock \
       dunst pipewire pipewire-pulseaudio pipewire-utils pulseaudio-utils \
